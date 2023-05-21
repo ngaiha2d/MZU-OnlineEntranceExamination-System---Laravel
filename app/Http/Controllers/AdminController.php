@@ -282,8 +282,9 @@ class AdminController extends Controller
 
         try{
             
-            //$dataa = QnaExam::where('exam_id',$request->exam_id)->with('question')->get();
-            $data = $request->exam_id;
+            //$data = $request->query('exam_id');
+            $data = QnaExam::where('exam_id',$request->exam_id)->with('question')->get();
+            //$data = $request->exam_id;
             return response()->json(['success'=>true,'msg'=>'Questions details!','data'=>$data]);
 
         }catch(\Exception $e){

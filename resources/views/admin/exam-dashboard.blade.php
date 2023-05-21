@@ -438,32 +438,31 @@
                 var id = $(this).attr('data-id');
 
                 $.ajax({
-                    url:"{{ route('getExamQuestions')}}",
+                    url:"{{ route('getExamQuestions')}}?exam_id=" +id,
                     type:"GET",
-                    data:{exam_id:id},
                     success:function(data){
                         console.log(data);
-                        // var html = '';
-                        // var questions = data.data;
-                        // if(questions .length > 0){
+                        var html = '';
+                        var questions = data.data;
+                        if(questions .length > 0){
 
-                        //     for(let i = 0; i  < questions.length; i++){
-                        //         html +=`
-                        //             <tr>
-                        //                 <td>`+(i+1)+`<td>
-                        //                 <td>`+questions[i]['question'][0]['question']+`<td>
-                        //             <tr>
-                        //         `;
-                        //     }
-                        // }
-                        // else{
-                        //     html +=`
-                        //         <tr>
-                        //             <td colspan="1">No Questions assigned<td>
-                        //         <tr>
-                        //     `;
-                        // }
-                        // $('.seeQuestionTable').html(html);
+                            for(let i = 0; i  < questions.length; i++){
+                                html +=`
+                                    <tr>
+                                        <td>`+(i+1)+`<td>
+                                        <td>`+questions[i]['question'][0]['question']+`<td>
+                                    <tr>
+                                `;
+                            }
+                        }
+                        else{
+                            html +=`
+                                <tr>
+                                    <td colspan="1">No Questions assigned<td>
+                                <tr>
+                            `;
+                        }
+                        $('.seeQuestionTable').html(html);
                     }
 
                 })
