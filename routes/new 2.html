@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>MZUOEE ADMIN</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="https://iili.io/HOoZm11.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="{{ asset('js/multiselect-dropdown.js')}}"></script>
+  <style>
+    .multiselect-dropdown {
+      width: 100% !important;
+    }
+
+    body {
+      background-color: #fbfbfb;
+    }
+
+    @media (min-width: 991.98px) {
+      main {
+        padding-left: 240px;
+      }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      padding: 58px 0 0; /* Height of navbar */
+      box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+      width: 240px;
+      z-index: 600;
+    }
+
+    @media (max-width: 991.98px) {
+      .sidebar {
+        width: 100%;
+      }
+    }
+
+    .sidebar .active {
+      border-radius: 5px;
+      box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    }
+
+    .sidebar-sticky {
+      position: relative;
+      top: 0;
+      height: calc(100vh - 48px);
+      padding-top: 0.5rem;
+      overflow-x: hidden;
+      overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar1 bg-light" style="border-color: #828487;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <b style="color:rgb(12, 81, 28);">MZU</b> <small style="font-family:MV Boli; color:rgb(12, 81, 28);">Online Entrance Examination</small>
+      </a>
+    </div>
+  </nav>
+
+  <!-- menu on the admin dashboard -->
+  <div class="wrapper d-flex align-items-stretch">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="collapse d-lg-block bg-light">
+      <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+          <i class="fa fa-bars"></i>
+          <span class="sr-only">Toggle Menu</span>
+        </button>
+      </div>
+      <div class="position-sticky">
+        <div class="list-group list-group-flush">
+
+          <h1><a href="/admin/dashboard" class="logo">Admin Dashboard</a></h1>
+
+          <a href="/subject" class="list-group-item py-2  active">
+            <div class="tile">
+              <i class="fa fa-book"></i>
+              <span>Subjects</span>
+            </div>
+          </a>
+
+          <a href="/admin/qna-ans" class="active list-group-item py-2 ripple active">
+            <div class="tile">
+              <i class="fa fa-question-circle"></i>
+              <span>Q&A</span>
+            </div>
+          </a>
+
+          <a href="/admin/exam" class="active list-group-item py-2 ripple active">
+            <div class="tile">
+              <i class="fa fa-tasks"></i>
+              <span>Exams</span>
+            </div>
+          </a>
+
+          <a href="/admin/marks" class="active list-group-item py-2 ripple active">
+            <div class="tile">
+              <i class="fa fa-check"></i>
+              <span>Marks</span>
+            </div>
+          </a>
+
+          <a href="/admin/resultss" class="active list-group-item py-2 ripple active">
+            <div class="tile">
+              <i class="fa fa-file-text-o"></i>
+              <span>Result</span>
+            </div>
+          </a>
+
+          <a href="/addCandidate" class="list-group-item py-2  active">
+            <div class="tile">
+              <i class="fa fa-users"></i>
+              <span>Import Candidate</span>
+            </div>
+          </a>
+
+          <a href="/admin/students" class="active list-group-item py-2 ripple active">
+            <div class="tile">
+              <i class="fa fa-graduation-cap"></i>
+              <span>Candidates</span>
+            </div>
+          </a>
+
+          <a href="/logout" class="list-group-item  py-2 ripple active">
+            <div class="tile">
+              <i class="fa fa-sign-out"></i>
+              <span>Logout</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar -->
+
+    <!-- Navbar -->
+    <div id="content" class="p-4 p-md-9.5 pt-5">
+      @yield('space-work')
+    </div>
+  </div>
+
+  <!-- <script src="{{asset('js/jquery.min.js')}}"></script> -->
+
+  <script src="{{asset('js/popper.js')}}"></script>
+  <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/main.js')}}"></script>
+</body>
+</html>
