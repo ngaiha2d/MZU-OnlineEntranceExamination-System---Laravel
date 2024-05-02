@@ -1,29 +1,92 @@
-@extends('layout/layout-common')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>OnlineEntranceExamination</title>
+    <head>
+  	<title>MZUOEE ADMIN</title>
+    <link rel = "icon" href = "https://iili.io/HOoZm11.png" type = "image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-@section('space-work')
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{asset('css/style.css')}}">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+
+        i.size {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 200px;
+          
+        }
+      
+        input[type=text] {
+          width: 100%;
+          padding: 0px 0px;
+          margin: opx 3;
+          box-sizing: border-box;
+          border: none;
+          border-bottom: 1px solid rgb(10, 67, 23);}
+
+        input[type=password] {
+          width: 100%;
+          padding: 0px 0px;
+          margin: 0px 0;
+          box-sizing: border-box;
+          border: none;
+          border-bottom: 1px solid rgb(10, 67, 23);
+}
+</style>
+<style>
+    .sticky-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+</style>
+  </head>
+<body>
+    <nav class="navbar bg-white sticky-nav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <b style="color:rgb(12, 81, 28);">MZU</b> <small style="font-family:MV Boli; color:rgb(12, 81, 28);">Online Entrance Examination</small>
+            </a>
+            <p style="color:rgb(12, 81, 28)"><h5> Welcome, <b>{{ Auth::user()->name }}</b></h5></p>
+            <h4 class='text-right time'> {{ $exam[0]['time']}}</h4>
+        </div>
+    </nav>
+    <br>
+    <br>
+
 
     @php
         $time = explode(':',$exam[0]['time']);
 
     @endphp
 
-    <div class='container' style="width:800px;">
+   
         
-        <p style="color:black"> <h5> Welcome, {{ Auth::user()->name }}</h5></p>
-        <div class="container border">
-        <h2 class="text-center">MZU </h2>
+        <div class="container-fluid border">
+            <i class="size" href="#"><img src="https://iili.io/HOx2t0x.png" alt="" width="190" height="190" ></i>
         <h3 class="text-center">{{ $exam[0]['exam_name']}} Entrance Examination</h3>
     </div>
-        <h4 class='text-right time'> {{ $exam[0]['time']}}</h4>
-        <br>
+    <div class='container ' style="width:800px;">
+        [![Hg69GQn.md.png](https://iili.io/Hg69GQn.md.png)](https://freeimage.host/i/Hg69GQn)
 
-
+<br>
 
         @php $qcount = 1; @endphp
         @if($success == true)
 
             @if(count($qna) > 0)
-            <div class="container-fluid border"> 
+            <div class="container-fluid"> 
             <form action="{{ route('examSubmit') }}" method="POST" class="mb-5" onsubmit="return isValid()">
                 @csrf
                 <input type="hidden" name="exam_id" value="{{ $exam[0]['id']}}">
@@ -50,7 +113,6 @@
             @else
                 <h3 style="color:red" class="text-center">Question and Answer not available</h3>
             @endif
-
         @else
             <h3 style="color:red" class="text-center">{{ $msg }}</h3>
         @endif
@@ -118,4 +180,5 @@
 
 </script>
 
-@endsection
+</body>
+</html>

@@ -163,7 +163,7 @@ class AdminController extends Controller
     public function qnaDashboard()
     {
         $questions = Question::with(['answers','exams'])->get();
-        return view('admin.qnaDashboard', compact('questions')); 
+        return view('admin.qnaDashboard', compact('questions'));
     }
 
     //add QnA function
@@ -357,12 +357,12 @@ class AdminController extends Controller
     {
         $exam_id = $request->exam_id;
         $exam_name = Exam::where('id',$exam_id)->pluck('exam_name')->first();
-        $attempts = ExamAttempt::where('exam_id',$exam_id)->get();
+        $attempts = ExamAttempt::where('exam_id', $exam_id)->orderBy('marks', 'desc')->get();
         return view('admin.result',compact('attempts','exam_id','exam_name'));
     }
     public function resultss()
     {
-        $attempts = Exam::all();
+        $attempts = Exam::with('subjects')->get();
         return view('admin.results',compact('attempts'));
     }
 

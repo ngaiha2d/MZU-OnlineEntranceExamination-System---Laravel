@@ -5,7 +5,7 @@
 <div class="container bootstrap snippets bootdey">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px;">Q&A Dashboard </strong></h1>
+        <h1><strong style="color:rgb(41, 141, 158); font-family: 'Poppins', sans-serif; font-size: 40px;">Q&A Dashboard </strong></h1>
       </div>
     </div>>
 
@@ -21,7 +21,7 @@
     <br><br>
 
     <table class="table">
-        <thead>
+        <thead class="table-rawng">
             <th>#</th>
             <th>Question</th>
             <th>Answers</th>
@@ -63,9 +63,9 @@
           <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Add Q&A</h5>
 
-                <button id="addAnswer" class="ml-5 btn btn-info">Add Answer</button>
+                <button id="addAnswer" class="ml-5 btn btn-outline-info">Add Answer</button>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close btn-outline-secondary" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
           </div>
@@ -77,6 +77,7 @@
                         <input type="text" class="w-100" name="question" placeholder="Enter Question" required>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col">
                         <input type="text" class="w-100" name="subject_id" placeholder="Enter Subject_id" required>
@@ -86,8 +87,8 @@
             
             <div class="modal-footer">
                 <span class="error" style="color:red;"></span>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add Q&A</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-info">Add Q&A</button>
             </div>
             </form>
             </div>
@@ -108,7 +109,7 @@
           </div>
             <div class="modal-body">
                 <table class="table">
-                    <thead>
+                    <thead class="table-rawng">
                         <th>#</th>
                         <th>Answer</th>
                         <th>Correct Ans</th>
@@ -122,7 +123,7 @@
             
             <div class="modal-footer">
                 <span class="error" style="color:red;"></span>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
             </div>
             </form>
             </div>
@@ -149,8 +150,8 @@
               </div>
               
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-danger">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-danger">Delete</button>
               </div>
               </div>
       </form>
@@ -176,8 +177,8 @@
               
               <div class="modal-footer">
                   <span class="error" style="color:red;"></span>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Import</button> 
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-info">Import</button> 
               </div>
               </form>
               </div>
@@ -255,13 +256,13 @@
                 }
                 else{
                     var html0 = `
-                <div class="row mt-2 answers">
+                <div class="row mt-2 px-3 answers">
 
                     <input type="radio" name="is_correct" class="is_correct">
                     <div class="col">
                         <input type="text" class="w-100" name="answers[]" placeholder="Enter Answer" required>
                     </div>
-                    <button class="btn btn-danger removeButton">Remove</button>
+                    <button class="btn btn-outline-danger  removeButton">Remove</button>
                 </div>
                 `;
 

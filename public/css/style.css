@@ -22,6 +22,7 @@
   --secondary: #6c757d;
   --success: #28a745;
   --info: #17a2b8;
+  --rawng: #137a8a;
   --warning: #ffc107;
   --danger: #dc3545;
   --light: #f8f9fa;
@@ -1427,6 +1428,10 @@ pre {
 .table-info > th,
 .table-info > td {
   background-color: #bee5eb; }
+.table-rawng,
+.table-rawng > th,
+.table-rawng > td {
+  background-color: #d3f9ff; }
 
 .table-info th,
 .table-info td,

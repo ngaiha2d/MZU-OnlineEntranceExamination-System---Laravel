@@ -2,14 +2,15 @@
 
 @section('space-work')
 
+<br>
   <!-- menu on the admin dashboard -->
   <div class="container bootstrap snippets bootdey">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px;">Admin Dashboard</strong></h1>
+        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px; color:rgb(41, 141, 158)">Admin Dashboard</strong></h1>
       </div>
     </div>
-
+    <br>
     <div class="row">
       <div class="col-sm-4">
         <div class="tile green">
@@ -51,13 +52,6 @@
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="tile green">
-          <a href="/addCandidate">
-            <h6 class="title"><i class="fa fa-upload" aria-hidden="true"></i> Candidate</h6>
-          </a>
-        </div>
-      </div>
 
       <div class="col-sm-4">
         <div class="tile green">
@@ -67,13 +61,7 @@
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <div class="tile green">
-          <a href="/logout">
-            <h3 class="title"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h3>
-          </a>
-        </div>
-      </div>
+      
     </div>
   </div>  
 

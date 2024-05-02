@@ -5,14 +5,14 @@
 <div class="container bootstrap snippets bootdey">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px;">Marks </strong></h1>
+        <h1><strong style="color:rgb(41, 141, 158); font-family: 'Poppins', sans-serif; font-size: 40px;">Marks </strong></h1>
       </div>
     </div>
 <div>
     
 <br>
     <table class="table">
-        <thead>
+        <thead class="table-rawng">
             <th>Id</th>
             <th>Exam Name</th>
             <th>Marks / Q</th>
@@ -79,8 +79,8 @@
 
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Update Marks</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-info">Update Marks</button>
               </div>
               </div>
       </form>

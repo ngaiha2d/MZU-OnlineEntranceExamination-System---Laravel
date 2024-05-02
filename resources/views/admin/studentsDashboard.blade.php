@@ -5,7 +5,7 @@
 <div class="container bootstrap snippets bootdey">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px;">Candidates </strong></h1>
+        <h1><strong style="color:rgb(41, 141, 158); font-family: 'Poppins', sans-serif; font-size: 40px;">Candidates </strong></h1>
       </div>
     </div>
 <span>
@@ -21,18 +21,23 @@
 
 <a class="btn btn-outline-info" href="{{ route('file-export') }}">Export Candidate list</a>
 <span>
+    <a class="btn btn-outline-info" href="/addCandidate">Import Candidate</a>
+    </span>
+<span>
     <a class="btn btn-outline-info" href="/sortExam">Sort by Exam</a>
     </span>
+
+
 <div>
     
 <br>
     <table class="table">
-        <thead>
+        <thead class="table-rawng">
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
             <th>phone no.</th>
-            <th>Exam Code</th>
+            <th>Subject Code</th>
         </thead>
         <tbody>
             @if(count($students) > 0)
@@ -62,7 +67,7 @@
     
           <div class="modal-content">
             <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Add Student</h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">Add Candidate</h5>
   
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -101,8 +106,8 @@
               
               <div class="modal-footer">
                   
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Add Student</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-primary">Add</button>
               </div>
               </form>
               </div>
@@ -134,8 +139,8 @@
               
               <div class="modal-footer">
                   
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-danger">delete Candidate</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-danger">delete Candidate</button>
               </div>
               </form>
               </div>

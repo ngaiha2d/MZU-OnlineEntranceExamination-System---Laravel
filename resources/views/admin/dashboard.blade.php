@@ -2,34 +2,29 @@
 
 @section('space-work')
 
+<h2 class="mb-4" style="font-family: Bahnschrift; ">Subjects</h2>
 
-<div class="container-fluid ">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h1><strong style="color:rgb(41, 141, 158); font-family: 'Poppins', sans-serif; font-size: 40px;">Subjects </strong></h1>
-    </div>
-  </div>
-
-
-<div class="container-fluid px-5">
-  <div>
-    <!-- Button trigger modal -->
-  <button style="font-family: Bahnschrift; " type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#addSubjectModal">
-  <span class="fa fa-plus-circle"></span> Add New Subject
-  </button>
-  <br><br>
+<div>
+      <!-- Button trigger modal -->
+    <button style="font-family: Bahnschrift; " type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSubjectModal">
+    <span class="fa fa-plus-circle"></span>Add New Subject
+    </button>
+    <br><br>
 </div>
+
+
 <!-- Table for the subjects -->
 <table class="table">
-  <thead class="table-rawng">
+  <thead>
     <tr>
-      <th scope="col">Exam No.</th>
+      <th scope="col">Subject Id</th>
       <th scope="col">Subject</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
+ <!-- checking if the data is passed from the authcontroller to here -->
   @if(count($subjects) > 0)
 
     @foreach($subjects as $subject)
@@ -37,10 +32,12 @@
         <td>{{ $subject->id}}</td>
         <td>{{ $subject->subject}}</td>
         <td>
-          <button class="btn btn-outline-info btn-sm editButton" data-id="{{ $subject->id}}" data-subject="{{ $subject->subject}}" data-toggle="modal" data-target="#editSubjectModal"><span class="fa fa-pencil-square-o"></span></button>
+          <!-- here the modal is called using data target and datamodal -->
+          <button class="btn btn-info btn-sm editButton" data-id="{{ $subject->id}}" data-subject="{{ $subject->subject}}" data-toggle="modal" data-target="#editSubjectModal"><span class="fa fa-pencil-square-o"></span></button>
           </td>
           <td>
-          <button class="btn btn-outline-danger btn-sm deleteButton" data-id="{{ $subject->id}}" data-toggle="modal" data-target="#deleteSubjectModal"><span class="fa fa-trash"></span></button>
+          <!-- here the modal is called using data target and datamodal -->
+          <button class="btn btn-danger btn-sm deleteButton" data-id="{{ $subject->id}}" data-toggle="modal" data-target="#deleteSubjectModal"><span class="fa fa-trash"></span></button>
           </td>
     </tr>
     @endforeach
@@ -52,7 +49,6 @@
 
   </tbody>
 </table>
-</div>
 
 
 
@@ -77,13 +73,16 @@
         </div>
         
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-outline-info">Add</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add</button>
         </div>
         </div>
     </form>
   </div>
 </div>   
+
+
+
 
 
 <!--edit subject  Modal -->
@@ -107,13 +106,14 @@
                 <input type="hidden" name="id" id="edit_subject_id">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-primary">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </div>
     </form>
   </div>
 </div>
+
 
 
 <!--delete subject  Modal -->
@@ -135,8 +135,8 @@
                 <input type="hidden" name="id" id="delete_subject_id">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </div>
           </div>
     </form>
@@ -144,13 +144,17 @@
 </div>
 
 
+
+
 <!-- preventing data to send// if the form is submotting we call the variable e to stop the data and then we take the data and then we serialize and then we use ajax to take the input form the vacant side -->
 <!-- jquery script for adding subject on admin dashboard -->
 <script>
 
+
 //script JQuery for adding the subjects in the admin dashboard 
   $(document).ready(function(){
     
+
       //adding the subject
       $("#addSubject").submit(function(e){
         e.preventDefault();
@@ -175,7 +179,8 @@
         });
       });
 
-  
+      
+      
       //edit subject //to show the data in the modal of the edit in the admin dashboard
       $(".editButton").click(function(){
         var subject_id = $(this).attr('data-id');
@@ -185,6 +190,7 @@
         $("#edit_subject_id").val(subject_id);
         
       });
+
 
 
       //JQuery script fot the edit subjects 
@@ -246,5 +252,6 @@
   });
 
 </script>
+
 
 @endsection

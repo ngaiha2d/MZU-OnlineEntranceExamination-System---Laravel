@@ -1,162 +1,472 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <title>MZUOEE ADMIN</title>
+@extends('layout/admin-layout')
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" href="https://iili.io/HOoZm11.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+@section('space-work')
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+<h2 class="mb-4" style="font-family: Bahnschrift; ">Exams</h2>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="{{ asset('js/multiselect-dropdown.js')}}"></script>
-  <style>
-    .multiselect-dropdown {
-      width: 100% !important;
-    }
+<div>
+      <!-- Button trigger modal -->
+    <button style="font-family: Bahnschrift; " type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#addExamModal">
+    <span class="fa fa-plus-circle"> </span>Add New Exam
+    </button>
+    <br><br>
+</div>
 
-    body {
-      background-color: #fbfbfb;
-    }
+<table class="table">
+    <thead>
+        <tr>
+            <th>Exam id</th>
+            <th>Exam name</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Add Question</th>
+            <th>Show Question</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
 
-    @media (min-width: 991.98px) {
-      main {
-        padding-left: 240px;
-      }
-    }
+    <tbody>
+        @if(count($exams) > 0) <!-- //checking of the data came to here form the database -->
+            @foreach($exams as $exam)
+                <tr>
+                    <td>{{ $exam->id }}</td>
+                    <td>{{ $exam->exam_name }}</td>
+                    <td>{{ $exam->subjects[0]['subject']}}</td>  <!--   here we get from the subjects table where we use the many to one relationship -->
+                    <td>{{ $exam->date }}</td>
+                    <td>{{ $exam->time }} Hrs</td>
+                    <td>
+                        <a href="#" class="addQuestions" style="color:#206649;" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#addQnaModal"><span class="fa fa-plus-circle"></span>Add Question</a>
+                    </td>
+                    <td>
+                        <a href="#" class="seeQuestions" style="color:#206649;" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#seeQnaModal"><span class="fa fa-plus-circle"></span>See Question</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-info editButton btn-sm" data-id="{{$exam->id}}" data-toggle="modal" data-target="#editExamModal"><span class="fa fa-pencil-square-o"></span></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-danger deleteButton btn-sm" data-id="{{$exam->id}}" data-toggle="modal" data-target="#deleteExamModal"><span class="fa fa-trash"></span></button>
+                    </td>
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspam="5">Exams not found</td>
+            </tr>
+        @endif
+    </tbody>
 
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      padding: 58px 0 0; /* Height of navbar */
-      box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-      width: 240px;
-      z-index: 600;
-    }
+</table>
 
-    @media (max-width: 991.98px) {
-      .sidebar {
-        width: 100%;
-      }
-    }
 
-    .sidebar .active {
-      border-radius: 5px;
-      box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-    }
 
-    .sidebar-sticky {
-      position: relative;
-      top: 0;
-      height: calc(100vh - 48px);
-      padding-top: 0.5rem;
-      overflow-x: hidden;
-      overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    }
-  </style>
+<!-- Modal for adding the exam -->
+<div class="modal fade" id="addExamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  
+        <div class="modal-content">
+          <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Exam</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+          </div>
 
-</head>
-
-<body>
-  <nav class="navbar1 bg-light" style="border-color: #828487;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <b style="color:rgb(12, 81, 28);">MZU</b> <small style="font-family:MV Boli; color:rgb(12, 81, 28);">Online Entrance Examination</small>
-      </a>
-    </div>
-  </nav>
-
-  <!-- menu on the admin dashboard -->
-  <div class="wrapper d-flex align-items-stretch">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="collapse d-lg-block bg-light">
-      <div class="custom-menu">
-        <button type="button" id="sidebarCollapse" class="btn btn-primary">
-          <i class="fa fa-bars"></i>
-          <span class="sr-only">Toggle Menu</span>
-        </button>
-      </div>
-      <div class="position-sticky">
-        <div class="list-group list-group-flush">
-
-          <h1><a href="/admin/dashboard" class="logo">Admin Dashboard</a></h1>
-
-          <a href="/subject" class="list-group-item py-2  active">
-            <div class="tile">
-              <i class="fa fa-book"></i>
-              <span>Subjects</span>
+          <form id="addExam">
+      <!-- Tpken for sending the value/data -->
+      <!-- sisplaying all the data -->
+      @csrf
+            <div class="modal-body">
+                <input type="text" name="exam_name" placeholder="Enter Exam Name" class="w-100" required>
+                <br><br>
+                <select name="subject_id" required class="w-100">
+                    <option value="">Select Subject</option>
+                    @if(count($subjects) > 0)     <!--//checking if the subject exists in the database -->
+                        @foreach($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject -> subject}}</option> <!--//keeping the data in the option -->
+                        @endforeach
+                    @endif    
+                </select>
+                <br><br>
+                <input type="date" name="date" class="w-100" required min="@php echo date('Y-m-d') @endphp"> <!-- using min="" we restrict that the admin cannot use the date that is the previous date -->
+                <br><br>
+                <input type="time" name="time" class="w-100" value='03:00' min='01:00' max= '03:00' required>
             </div>
-          </a>
-
-          <a href="/admin/qna-ans" class="active list-group-item py-2 ripple active">
-            <div class="tile">
-              <i class="fa fa-question-circle"></i>
-              <span>Q&A</span>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Exam</button>
             </div>
-          </a>
-
-          <a href="/admin/exam" class="active list-group-item py-2 ripple active">
-            <div class="tile">
-              <i class="fa fa-tasks"></i>
-              <span>Exams</span>
             </div>
-          </a>
-
-          <a href="/admin/marks" class="active list-group-item py-2 ripple active">
-            <div class="tile">
-              <i class="fa fa-check"></i>
-              <span>Marks</span>
-            </div>
-          </a>
-
-          <a href="/admin/resultss" class="active list-group-item py-2 ripple active">
-            <div class="tile">
-              <i class="fa fa-file-text-o"></i>
-              <span>Result</span>
-            </div>
-          </a>
-
-          <a href="/addCandidate" class="list-group-item py-2  active">
-            <div class="tile">
-              <i class="fa fa-users"></i>
-              <span>Import Candidate</span>
-            </div>
-          </a>
-
-          <a href="/admin/students" class="active list-group-item py-2 ripple active">
-            <div class="tile">
-              <i class="fa fa-graduation-cap"></i>
-              <span>Candidates</span>
-            </div>
-          </a>
-
-          <a href="/logout" class="list-group-item  py-2 ripple active">
-            <div class="tile">
-              <i class="fa fa-sign-out"></i>
-              <span>Logout</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </nav>
-    <!-- Sidebar -->
-
-    <!-- Navbar -->
-    <div id="content" class="p-4 p-md-9.5 pt-5">
-      @yield('space-work')
-    </div>
+    </form>
   </div>
+</div>  
 
-  <!-- <script src="{{asset('js/jquery.min.js')}}"></script> -->
 
-  <script src="{{asset('js/popper.js')}}"></script>
-  <script src="{{asset('js/bootstrap.min.js')}}"></script>
-  <script src="{{asset('js/main.js')}}"></script>
-</body>
-</html>
+
+<!-- Modal for editing the exam -->
+<div class="modal fade" id="editExamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  
+        <div class="modal-content">
+          <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Exam</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+          </div>
+
+          <form id="editExam">
+      <!-- Tpken for sending the value/data -->
+      <!-- displaying all the data -->
+      @csrf
+            <div class="modal-body">
+                <input type="hidden" name="exam_id"  id="exam_id">
+                <input type="text" name="exam_name" id="exam_name" placeholder="Enter Exam Name" class="w-100" required>
+                <br><br>
+                <select name="subject_id" id="subject_id" required class="w-100">
+                    <option value="">Select Subject</option>
+                    @if(count($subjects) > 0)     <!--//checking if the subject exists in the database -->
+                        @foreach($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject -> subject}}</option> <!--//keeping the data in the option -->
+                        @endforeach
+                    @endif    
+                </select>
+                <br><br>
+                <input type="date" name="date" id="date" class="w-100" required min="@php echo date('Y-m-d') @endphp"> <!-- using min="" we restrict that the admin cannot use the date that is the previous date -->
+                <br><br>
+                <input type="time" name="time" value='03:00' min='01:00' max= '03:00' class="w-100" required>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            </div>
+    </form>
+  </div>
+</div>  
+
+
+
+<!-- Modal for Deleting the exam -->
+<div class="modal fade" id="deleteExamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  
+        <div class="modal-content">
+          <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Delete Exam</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+          </div>
+
+          <form id="deleteExam"> 
+
+      @csrf
+            <div class="modal-body">
+                <input type="hidden" name="exam_id"  id="deleteExamId">
+                <p>are you sure you wan't to delete the EXAM ?</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+            </div>
+    </form>
+  </div>
+</div> 
+
+<!-- Modal for adding the Answers -->
+<div class="modal fade" id="addQnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  
+        <div class="modal-content">
+          <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Q&A</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+          </div>
+
+          <form id="addQna">
+
+      @csrf
+            <div class="modal-body">
+                <input type="hidden" name="exam_id" id="addExamId">
+                <input type="search" name="search" class="w-100" placeholder="search">
+                <br><br>
+                <table class="table">
+                    <thead>
+                        <th>Select</th>
+                        <th> Question</th>
+                    </thead>
+                    <tbody class="addBody">
+
+                    </tbody>
+                </table>
+
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Q&A</button>
+            </div>
+            </div>
+    </form>
+  </div>
+</div> 
+
+
+
+<div class="modal fade" id="seeQnaModal" tabindex="-1" role="dialog" aria   -labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    
+          <div class="modal-content">
+            <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Q&A</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+  
+              <div class="modal-body">
+                  <table class="table">
+                      <thead>
+                          <th> Question</th>
+                      </thead>
+                      <tbody class="seeQuestionTable">
+  
+                      </tbody>
+                  </table>
+  
+              </div>
+              
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+              </div>
+      </form>
+    </div>
+  </div> 
+
+
+
+
+<script>
+    
+    $(document).ready(function(){
+
+
+        $('#addExam').submit(function(e){
+            e.preventDefault();
+
+            var formData = $(this).serialize(); //we get the data 
+
+            $.ajax({
+                url:"{{ route('addExam')}}", //passing the route
+                type: "POST",
+                data:formData,
+                success:function(data){ //checking the data
+                    if(data.success == true){
+                        location.reload();//reload the page
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+
+
+        //edit exam button modal link
+        $(".editButton").click(function(){
+            var id = $(this).attr('data-id');
+            $("#exam_id").val(id);
+
+            var url = '{{route("getExamDetail","id")}}';
+            url = url.replace('id',id);
+
+            $.ajax({
+                url:url,
+                type:"GET",
+                success:function(data){
+                    // to check the data using this statement the data show in the console// console.log(data);
+                    if(data.success == true)
+                    {
+                        var exam = data.data; //to input the data in the modal
+                        $("#exam_name").val(exam[0].exam_name);
+                        $("#subject_id").val(exam[0].subject_id);
+                        $("#date").val(exam[0].date);
+                        $("#time").val(exam[0].time);
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });    //when we click 
+
+
+        $('#editExam').submit(function(e){
+            e.preventDefault();
+
+            var formData = $(this).serialize(); //we get the data 
+
+            $.ajax({
+                url:"{{ route('updateExam')}}", //passing the route
+                type: "POST",
+                data:formData,
+                success:function(data){ //checking the data
+                    if(data.success == true){
+                        location.reload();//reload the page
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+
+        //delete exam 
+        $(".deleteButton").click(function(){
+            var id = $(this).attr('data-id');  //getting data
+            $("#deleteExamId").val(id);  //the id for the button in the row delete exam  
+
+        });
+
+        $("#deleteExam").submit(function(e){ //when the delete exam form in submitted
+            e.preventDefault();
+
+            var formData = $(this).serialize(); //we get the data 
+
+            $.ajax({
+                url:"{{ route('deleteExam')}}", //passing the route of the route in the web 
+                type: "POST",
+                data:formData,
+                success:function(data){ //checking the data
+                    if(data.success == true){
+                        location.reload();//reload the page
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+
+        //add question part
+        $('.addQuestions').click(function(){
+
+           var id =  $(this).attr('data-id');
+           $('#addExamId').val(id);
+
+           $.ajax({
+                url:"{{ route('getQuestions')}}",
+                type:"GET",
+                data:{exam_id:id},
+                success:function(data){
+                    //console.log(data)// to see the data
+                    //
+                    if(data.success == true){
+
+                        var questions = data.data; //all the question assign to questions
+                        var html = '';
+
+                        //check if there are question which is not added on the exam table of this id
+                        if(questions.length > 0){
+                            for(let i = 0; i < questions.length;i++){
+                                //checkbox 
+                                html += `
+                                    <tr>
+                                        <td><input type="checkbox" value="`+questions[i]['id']+`" name="question_ids[]"></td>
+                                        <td>`+questions[i]['questions']+`</td>
+                                    </tr>
+                                `;
+                            }
+                        }
+                        else{
+                            html +=`
+                            <tr>
+                                <td colspan="2">Questions not available!</td>
+                            </tr>
+                            `;
+                        }
+                        $('.addBody').html(html); //apending the html
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                }
+           });
+            
+
+        })
+
+        //submitting the q&a checkbox
+        $("#addQna").submit(function(e){ //when the delete exam form in submitted
+            e.preventDefault();
+
+            var formData = $(this).serialize(); //we get the data 
+
+            $.ajax({
+                url:"{{ route('addQuestions')}}", //passing the route of the route in the web 
+                type: "POST",
+                data:formData,
+                success:function(data){ //checking the data
+                    if(data.success == true){
+                        location.reload();//reload the page
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+            $('.seeQuestions').click(function(){
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url:"{{ route('getExamQuestions')}}",
+                    type:"GET",
+                    data:{exam_id:id},
+                    success:function(data){
+                        
+                        var html = '';
+                        var questions = data.data;
+                        if(questions .length > 0){
+
+                            for(let i = 0; i  < questions.length; i++){
+                                html +=`
+                                    <tr>
+                                        <td>`+(i+1)+`<td>
+                                        <td>`+questions[i]['question'][0]['question']+`<td>
+                                    <tr>
+                                `;
+                            }
+                        }
+                        else{
+                            html +=`
+                                <tr>
+                                    <td colspan="1">No Questions assigned<td>
+                                <tr>
+                            `;
+                        }
+                        $('.seeQuestionTable').html(html);
+                    }
+
+                })
+            })
+    });
+
+</script>
+
+
+
+@endsection

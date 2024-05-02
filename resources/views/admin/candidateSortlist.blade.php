@@ -5,7 +5,7 @@
 <div class="container bootstrap snippets bootdey">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px;">{{$exam_name}}  Candidate</strong></h1>
+        <h1><strong style="color:rgb(41, 141, 158); font-family: 'Poppins', sans-serif; font-size: 40px;">{{$exam_name}}  Candidate</strong></h1>
       </div>
     </div>
 <span>
@@ -27,7 +27,7 @@
     
 <br>
     <table class="table">
-        <thead>
+        <thead class="table-rawng">
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
@@ -101,8 +101,8 @@
               
               <div class="modal-footer">
                   
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-info">Add Student</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-info">Add Student</button>
               </div>
               </form>
               </div>
@@ -134,8 +134,8 @@
               
               <div class="modal-footer">
                   
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-danger">delete Candidate</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-outline-danger">delete Candidate</button>
               </div>
               </form>
               </div>

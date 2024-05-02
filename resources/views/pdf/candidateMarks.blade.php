@@ -56,6 +56,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -65,9 +66,11 @@
                 </tr>
             </thead>
             <tbody>
+                @php $x = 1; @endphp
                 @if(count($attempts) > 0)
                     @foreach ($attempts as $attempt)
                         <tr>
+                            <td>{{ $x++}}</td>
                             <td>{{ $attempt->user->id }}</td>
                             <td>{{ $attempt->user->name }}</td>
                             <td>{{ $attempt->user->email }}</td>

@@ -50,8 +50,9 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       
-     <b style="color:rgb(12, 81, 28);">MZU</b> <small style="font-family:MV Boli; color:rgb(12, 81, 28);">Online Entrance Examination</small>
+     <b style="color:rgb(32, 159, 168);">MZU</b> <small style="font-family:MV Boli; color:rgb(32, 159, 168);">Online Entrance Examination</small>
     </a>
+    
   </div>
   
 </nav>

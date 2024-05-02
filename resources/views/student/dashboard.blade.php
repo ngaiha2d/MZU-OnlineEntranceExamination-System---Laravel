@@ -1,11 +1,11 @@
 @extends('layout/student-layout')
 
 @section('space-work')
-<h1>Exams </h1>
-
+<h1 align="center">Exams </h1>
+<br>
     <table class="table">
 
-    <thead>
+    <thead class="table-rawng">
         <th>#</th>
         <th>Exam name</th>
         <th>Subject Name</th>

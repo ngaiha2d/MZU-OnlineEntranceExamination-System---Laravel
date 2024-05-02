@@ -10,7 +10,7 @@
 <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="/login" role="tab"
-      aria-controls="pills-login" aria-selected="true"><h1 style="font-family: fantasy; color:rgb(12, 81, 28);">Login</h1></a>
+      aria-controls="pills-login" aria-selected="true"><h1 style="font-family: fantasy; color:rgb(31, 131, 145);">Login</h1></a>
   </li>
   
 </ul>
@@ -29,8 +29,6 @@
   <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
 
   
-
-
     <form action="{{route('userLogin')}}" method="POST">
     @csrf
 
@@ -79,7 +77,7 @@
 
       <!-- Submit button -->
       <div class="text-center">
-      <button type="submit" class="btn btn-success  mb-1" style="width: 200px; align:center; ">Sign in</button>
+      <button type="submit" class="btn btn-outline-info  mb-1" style="width: 200px; align:center; ">Sign in</button>
       </div>
       <!-- Register buttons -->
       

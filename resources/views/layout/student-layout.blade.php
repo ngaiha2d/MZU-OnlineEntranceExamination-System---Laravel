@@ -15,45 +15,52 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 
+  <style>
+    .navbar1 {
+      border-color: #828487;
+      padding-top: 0px; /* Adjust the top padding */
+      padding-bottom: 0px; /* Adjust the bottom padding */
+    }
+  
+    .navbar-brand {
+      margin-right: 25px; /* Adjust the right margin for the brand logo */
+    }
+  
+    .navbar-brand b {
+      font-size: 24px; /* Adjust the font size of the brand logo */
+    }
+  
+    .navbar-brand small {
+      font-size: 17px; /* Adjust the font size of the small text */
+    }
+    .nav-link {
+    color:rgb(43, 173, 180) ; /* Set the desired color */
+    }
 
+    .nav-link:hover {
+      color: rgb(23, 94, 94); /* Set the desired hover color */
+    }
+  </style>
 
   <body>
-  <nav class="navbar1 bg-white">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      
-      <b style="color:rgb(12, 81, 28);">MZU</b> <small style="font-family:MV Boli; color:rgb(12, 81, 28);">Online Entrance Examination</small>
-     </a>
-  </div>
-</nav>
+    <nav class="navbar1 bg-light" style="border-color: #828487;">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/homepage">
+          <b style="color:rgb(32, 159, 168);">MZU</b> <small style="font-family:MV Boli; color:rgb(32, 159, 168);">Online Entrance Examination</small>
+        </a>
+        <a href="/logout" class="nav-link">
+          <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+        </a>
+      </div>
+    </nav>
+
+    
 		<!-- menu on the admin dashboard -->
 		<div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar" class="collapse d-lg-block bg-light">
-  <div class="custom-menu">
-					<button type="button" id="sidebarCollapse" class="btn btn-primary">
-	          <i class="fa fa-bars"></i>
-	          <span class="sr-only">Toggle Menu</span>
-	        </button>
-        </div>
-    <div class="position-sticky">
-      <div class="list-group list-group-flush">
-        
-      <h1 ><a href="/dashboard" class="logo" ><i class="fa fa-user-circle" aria-hidden="true"></i> {{Auth::User()->name}} </a></h1>
-      
-        <a href="/admin/dashboard" class="list-group-item py-2  active ">
-          <i class="fa fa-th-list mr-3"></i><span>Dashboard</span>
-        </a>
-        <a href="/logout" class="list-group-item  py-2 ripple active ">
-          <i class="fa fa-sign-out mr-3"></i><span>Logout</span>
-        </a>
-        
-        
-      </div>
-    </div>
-  </nav>
 
         <!-- Page Content  -->
-        <div id="content" class="p-4 p-md-5 pt-5">
+        <div id="content" class="p-md-4">
+          <h4 >Welcome <a href="/dashboard" class="logo" ><i class="fa fa-user-circle" aria-hidden="true"></i> {{Auth::User()->name}} </a></h4>
             @yield('space-work')
         </div>
 		</div>

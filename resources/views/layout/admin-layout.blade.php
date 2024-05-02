@@ -14,45 +14,25 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{{ asset('js/multiselect-dropdown.js')}}"></script>
   <style>
-    p, span, a, ul, li, button {
-      font-family: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-    }
-
-    strong {
-      font-weight: 600;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Open Sans', "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serify;
-      line-height: 1.5em;
-      font-weight: 300;	
-    }
-
-    strong {
-      font-weight: 400;
-    }
-
     .tile {  
       width: 100%;
       display: inline-block;
       box-sizing: border-box;
-      background: #fff;		
+      background: transparent;
       padding: 20px;
       margin-bottom: 30px;
       transition: background-color 0.3s ease;
-      border-radius: 10px; /* Rounded border edges */
+      border-radius: 10px;
+      border: 2px solid rgb(36, 138, 138);
     } 
 
     .tile:hover {
-      background-color: rgb(56, 138, 40);
+      background-color: rgba(121, 242, 248, 0.171);
     }
 
     .title {
       margin-top: 0px;
-      color: #fff;
+      color: #2e93a5;
       font-size: 40px;
       display: flex;
       align-items: center;
@@ -71,7 +51,7 @@
     }
 
     .purple:hover {
-      background: darken(#5133AB, 10%);
+      background: darken(#000000, 10%);
     }	
     
     .red { 
@@ -79,16 +59,16 @@
     }
 
     .red:hover {
-      background: darken(#AC193D, 10%);
+      background: darken(#000000, 10%);
     }		
 
 
     .green {
-      background: #17a2b8;
+      background: #ffffff;
     }
 
     .green:hover {
-      background: darken(#ffffff, 10%);
+      background: darken(#000000, 10%);
     }		
 
 
@@ -97,7 +77,7 @@
     }
 
     .blue:hover {
-      background: darken(#2672EC, 10%);
+      background: darken(#000000, 10%);
     }	
 
 
@@ -106,20 +86,51 @@
     }
 
     .orange:hover {
-      background: darken(#DC572E, 10%);
+      background: darken(#000000, 10%);
     }
-  </style>
+    .nav-link {
+    color:rgb(43, 173, 180) ; /* Set the desired color */
+    }
+
+    .nav-link:hover {
+      color: rgb(23, 94, 94); /* Set the desired hover color */
+    }
+</style>
+<style>
+  .navbar1 {
+    border-color: #828487;
+    padding-top: 0px; /* Adjust the top padding */
+    padding-bottom: 0px; /* Adjust the bottom padding */
+  }
+
+  .navbar-brand {
+    margin-right: 25px; /* Adjust the right margin for the brand logo */
+  }
+
+  .navbar-brand b {
+    font-size: 24px; /* Adjust the font size of the brand logo */
+  }
+
+  .navbar-brand small {
+    font-size: 17px; /* Adjust the font size of the small text */
+  }
+</style>
 
 </head>
 
 <body>
-  <nav class="navbar1 bg-light" style="border-color: #828487;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/homepage">
-        <b style="color:rgb(12, 81, 28);">MZU</b> <small style="font-family:MV Boli; color:rgb(12, 81, 28);">Online Entrance Examination</small>
-      </a>
-    </div>
-  </nav>
+  <span>
+    <nav class="navbar1 bg-light" style="border-color: #828487;">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/homepage">
+          <b style="color:rgb(32, 159, 168);">MZU</b> <small style="font-family:MV Boli; color:rgb(32, 159, 168);">Online Entrance Examination</small>
+        </a>
+        <a href="/logout" class="nav-link">
+          <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+        </a>
+      </div>
+    </nav>
+    
   
   <div>
     @yield('space-work')

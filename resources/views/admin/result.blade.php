@@ -5,7 +5,7 @@
 <div class="container bootstrap snippets bootdey">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px;">{{$exam_name}} Exam Mark List </strong></h1>
+        <h1><strong style="color:rgb(41, 141, 158); font-family: 'Poppins', sans-serif; font-size: 40px;">{{$exam_name}} Exam Merit List </strong></h1>
       </div>
     </div>
 
@@ -16,7 +16,8 @@
 <div>
 
     <table class="table">
-        <thead>
+        <thead class="table-rawng">
+            <th>#</th>
             <th>id</th>
             <th>Name</th>
             <th>Email</th>
@@ -27,30 +28,31 @@
         </thead>
         <tbody>
          
-            @if(count($attempts) > 0)
+            @php $x = 1; @endphp
 
-                @foreach ($attempts as $attempt)
-                @php $x = 1; @endphp
-                    <tr>
-                        <td> {{ $attempt->user->id }}</td>
-                        <td> {{ $attempt->user->name }}</td>
-                        <td> {{ $attempt->user->email }}</td>
-                        <td> {{ $attempt->user->phone_no }}</td>
-                        <td> {{ $attempt->exam->exam_name }}</td>
-                        <td> {{ $attempt->marks }}</td>
-                        <td>
-                            <a  class="btn btn-outline-success btn-sm" href="{{route('export_user_pdf',['attempt_id' => $attempt->id,'name'=>$attempt->user->name,'id'=>$attempt->user->id])}}"> <i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i> Download </a> 
-                        </td>
-                    </tr>
-                    
-                @endforeach
+@if(count($attempts) > 0)
+    @foreach ($attempts as $attempt)
+        <tr>
+            <td> {{ $x++ }} </td>
+            <td> {{ $attempt->user->id }}</td>
+            <td> {{ $attempt->user->name }}</td>
+            <td> {{ $attempt->user->email }}</td>
+            <td> {{ $attempt->user->phone_no }}</td>
+            <td> {{ $attempt->exam->exam_name }}</td>
+            <td> {{ $attempt->marks }}</td>
+            <td>
+                <a class="btn btn-outline-success btn-sm" href="{{route('export_user_pdf',['attempt_id' => $attempt->id,'name'=>$attempt->user->name,'id'=>$attempt->user->id])}}">
+                    <i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i> Download
+                </a>
+            </td>
+        </tr>
+    @endforeach
+@else
+    <tr>
+        <td colspan="5"> No candidate attempts</td>
+    </tr>
+@endif
 
-            @else
-            <tr>
-                <td colspan="5"> No candidate attempts</td>
-            </tr>
-                
-            @endif
 
         </tbody>
     </table>
@@ -73,8 +75,8 @@
           Loading...
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Approve</button>
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-primary">Approve</button>
         </div>
       </form>
       </div>

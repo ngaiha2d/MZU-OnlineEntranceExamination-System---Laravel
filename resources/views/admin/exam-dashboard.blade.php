@@ -5,7 +5,7 @@
 <div class="container bootstrap snippets bootdey">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1><strong style="font-family: 'Poppins', sans-serif; font-size: 40px;"><u></u> Exams </strong></h1>
+        <h1><strong style="color:rgb(41, 141, 158); font-family: 'Poppins', sans-serif; font-size: 40px;"><u></u> Exams </strong></h1>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
 </div>
 
 <table class="table">
-    <thead>
+    <thead class="table-rawng">
         <tr>
             <th>Exam id</th>
             <th>Exam name</th>
@@ -100,8 +100,8 @@
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info">Add Exam</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-info">Add Exam</button>
             </div>
             </div>
     </form>
@@ -145,8 +145,8 @@
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info">Update</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-info">Update</button>
             </div>
             </div>
     </form>
@@ -176,8 +176,8 @@
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
             </div>
             </div>
     </form>
@@ -204,7 +204,7 @@
                 <input type="search" name="search" class="w-100" placeholder="search">
                 <br><br>
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="table-rawng">
                         <th>Select</th>
                         <th>Question</th>
                     </thead>
@@ -216,8 +216,8 @@
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add Q&A</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-primary">Add Q&A</button>
             </div>
             </div>
     </form>
@@ -238,8 +238,8 @@
             </div>
   
               <div class="modal-body">
-                  <table class="table">
-                      <thead>
+                  <table class="table table-bordered">
+                      <thead class="table-rawng">
                           <th> Question</th>
                       </thead>
                       <tbody class="seeQuestionTable">
@@ -250,7 +250,7 @@
               </div>
               
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
               </div>
               </div>
       </form>
@@ -434,39 +434,36 @@
             });
         });
 
-            $('.seeQuestions').click(function(){
-                var id = $(this).attr('data-id');
+        $('.seeQuestions').click(function(){
+    var id = $(this).attr('data-id');
 
-                $.ajax({
-                    url:"{{ route('getExamQuestions')}}?exam_id=" +id,
-                    type:"GET",
-                    success:function(data){
-                        console.log(data);
-                        var html = '';
-                        var questions = data.data;
-                        if(questions .length > 0){
-
-                            for(let i = 0; i  < questions.length; i++){
-                                html +=`
-                                    <tr>
-                                        <td>`+(i+1)+`<td>
-                                        <td>`+questions[i]['question'][0]['question']+`<td>
-                                    <tr>
-                                `;
-                            }
-                        }
-                        else{
-                            html +=`
-                                <tr>
-                                    <td colspan="1">No Questions assigned<td>
-                                <tr>
-                            `;
-                        }
-                        $('.seeQuestionTable').html(html);
-                    }
-
-                })
-            })
+    $.ajax({
+    url: "{{ route('getExamQuestions') }}",
+    type: "GET",
+    data: { exam_id: id },
+    success: function (data) {
+        var html = '';
+        var questions = data.data;
+        if (questions.length > 0) {
+            for (let i = 0; i < questions.length; i++) {
+                html += `
+                    <tr>
+                        <td>` + (i + 1) + `</td>
+                        <td>` + questions[i]['question'][0]['question'] + `</td>
+                    </tr>
+                `;
+            }
+        } else {
+            html += `
+                <tr>
+                    <td colspan="2">No Questions assigned</td>
+                </tr>
+            `;
+        }
+        $('.seeQuestionTable').html(html);
+    }
+});
+});
     });
 
 </script>
